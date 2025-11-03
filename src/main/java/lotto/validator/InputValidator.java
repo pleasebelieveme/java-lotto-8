@@ -3,16 +3,13 @@ package lotto.validator;
 import java.util.List;
 
 import lotto.domain.Lotto;
+import lotto.domain.WinningLotto;
 
 public class InputValidator {
 
 	private static final int LOTTO_PRICE = 1000;
 	private static final int MIN_PURCHASE_AMOUNT = 1000;
 	private static final int ZERO_AMOUNT = 0;
-
-	private InputValidator() {
-		// 인스턴스화 방지
-	}
 
 	public static void validatePurchaseAmount(int amount) {
 		validateNegative(amount);
@@ -50,5 +47,10 @@ public class InputValidator {
 	public static void validateWinningNumbers(List<Integer> numbers) {
 		// Lotto 생성자에 List<Integer>를 전달하여 null, 개수, 범위, 중복 검증을 위임
 		new Lotto(numbers);
+	}
+
+	public static void validateBonusNumber(Lotto winningNumbers, int bonusNumber) {
+		// WinningLotto 생성자를 호출하여 범위 및 중복 검증을 위임
+		new WinningLotto(winningNumbers, bonusNumber);
 	}
 }
