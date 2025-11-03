@@ -13,7 +13,7 @@ import static lotto.domain.Lotto.MAX_LOTTO_NUMBER;
 import static lotto.domain.Lotto.MIN_LOTTO_NUMBER;
 
 public class LottoGenerator {
-	private static final int LOTTO_PRICE = 1000;
+	public static final int LOTTO_PRICE = 1000;
 
 	public static List<Lotto> generateLottos(int purchaseAmount) {
 		int lottoCount = purchaseAmount / LOTTO_PRICE;
