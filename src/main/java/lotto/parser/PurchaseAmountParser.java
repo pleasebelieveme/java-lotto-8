@@ -1,7 +1,5 @@
 package lotto.parser;
 
-import java.util.Objects;
-
 public class PurchaseAmountParser {
 
 	public static int parse(String input) {
