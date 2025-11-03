@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-	private static final int LOTTO_NUMBER_COUNT = 6;
-	private static final int MIN_LOTTO_NUMBER = 1;
-	private static final int MAX_LOTTO_NUMBER = 45;
+	public static final int LOTTO_NUMBER_COUNT = 6;
+	public static final int MIN_LOTTO_NUMBER = 1;
+	public static final int MAX_LOTTO_NUMBER = 45;
 
 	private final List<Integer> numbers;
 
