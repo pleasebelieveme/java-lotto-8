@@ -8,7 +8,7 @@ public class PurchaseAmountParser {
 		if (input == null || input.trim().isEmpty()) {
 			throw new IllegalArgumentException("[ERROR] 구입 금액을 입력해주세요.");
 		}
-		return parseToInteger(input);
+		return parseToInteger(input.trim());
 	}
 
 	private static int parseToInteger(String input) {
