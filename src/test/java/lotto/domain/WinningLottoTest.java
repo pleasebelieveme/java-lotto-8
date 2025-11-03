@@ -23,7 +23,7 @@ class WinningLottoTest {
 		// When
 		WinningLotto winningLotto = new WinningLotto(validWinningLottoNumbers, bonusNumber);
 
-		// Then (내부 필드에 대한 직접적인 getter는 없지만, 검증 로직 통과 여부로 확인)
+		// Then
 		assertThat(winningLotto).isNotNull();
 	}
 
@@ -108,7 +108,7 @@ class WinningLottoTest {
 	@Test
 	void test8() {
 		// 당첨 번호: 1, 2, 3, 4, 5, 6
-		int bonusNumber = 6; // 중복
+		int bonusNumber = 6;
 		assertThatThrownBy(() -> new WinningLotto(validWinningLottoNumbers, bonusNumber))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
