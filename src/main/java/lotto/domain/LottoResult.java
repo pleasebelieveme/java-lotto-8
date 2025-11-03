@@ -57,4 +57,12 @@ public class LottoResult {
 
 		return String.format(PROFIT_RATE_FORMAT, profitRate);
 	}
+
+	public Map<Rank, Integer> getResult() {
+		return result;
+	}
+
+	public int getPurchaseAmount() {
+		return purchaseAmount;
+	}
 }
