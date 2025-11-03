@@ -1,5 +1,9 @@
 package lotto.validator;
 
+import java.util.List;
+
+import lotto.domain.Lotto;
+
 public class InputValidator {
 
 	private static final int LOTTO_PRICE = 1000;
@@ -41,5 +45,10 @@ public class InputValidator {
 		if (amount >= MIN_PURCHASE_AMOUNT && amount % LOTTO_PRICE != 0) {
 			throw new IllegalArgumentException("[ERROR] 구입 금액은 1,000원 단위여야 합니다.");
 		}
+	}
+
+	public static void validateWinningNumbers(List<Integer> numbers) {
+		// Lotto 생성자에 List<Integer>를 전달하여 null, 개수, 범위, 중복 검증을 위임
+		new Lotto(numbers);
 	}
 }
