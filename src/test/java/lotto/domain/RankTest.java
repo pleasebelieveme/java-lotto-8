@@ -11,7 +11,7 @@ class RankTest {
 
 	@DisplayName("1: 6개 일치하면 1등")
 	@Test
-	void test1MatchSixNumbers() {
+	void test1() {
 		Rank rank = Rank.valueOf(6, false);
 
 		assertThat(rank).isEqualTo(Rank.FIRST);
@@ -20,7 +20,7 @@ class RankTest {
 
 	@DisplayName("2: 5개 일치하고 보너스볼 일치하면 2등")
 	@Test
-	void test2MatchFiveNumbersWithBonus() {
+	void test2() {
 		Rank rank = Rank.valueOf(5, true);
 
 		assertThat(rank).isEqualTo(Rank.SECOND);
@@ -29,7 +29,7 @@ class RankTest {
 
 	@DisplayName("3: 5개 일치하고 보너스볼 불일치하면 3등")
 	@Test
-	void test3MatchFiveNumbersWithoutBonus() {
+	void test3() {
 		Rank rank = Rank.valueOf(5, false);
 
 		assertThat(rank).isEqualTo(Rank.THIRD);
@@ -38,7 +38,7 @@ class RankTest {
 
 	@DisplayName("4: 4개 일치하면 4등")
 	@Test
-	void test4MatchFourNumbers() {
+	void test4() {
 		Rank rank = Rank.valueOf(4, false);
 
 		assertThat(rank).isEqualTo(Rank.FOURTH);
@@ -47,7 +47,7 @@ class RankTest {
 
 	@DisplayName("5: 3개 일치하면 5등")
 	@Test
-	void test5MatchThreeNumbers() {
+	void test5() {
 		Rank rank = Rank.valueOf(3, false);
 
 		assertThat(rank).isEqualTo(Rank.FIFTH);
@@ -57,7 +57,7 @@ class RankTest {
 	@DisplayName("6: 2개 이하 일치하면 NONE")
 	@ParameterizedTest
 	@CsvSource({"0, false", "1, false", "2, false"})
-	void test6MatchLessThanThree(int matchCount, boolean matchBonus) {
+	void test6(int matchCount, boolean matchBonus) {
 		Rank rank = Rank.valueOf(matchCount, matchBonus);
 
 		assertThat(rank).isEqualTo(Rank.NONE);
@@ -66,7 +66,7 @@ class RankTest {
 
 	@DisplayName("7: 당첨 여부 확인")
 	@Test
-	void test7IsWinning() {
+	void test7() {
 		assertThat(Rank.FIRST.isWinning()).isTrue();
 		assertThat(Rank.SECOND.isWinning()).isTrue();
 		assertThat(Rank.THIRD.isWinning()).isTrue();
