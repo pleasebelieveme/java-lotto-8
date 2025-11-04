@@ -37,29 +37,22 @@ class LottoTicketsTest {
 		assertThat(lottoTickets.getLottoCount()).isEqualTo(2);
 	}
 
-	// @DisplayName("정상3: 당첨 번호와 비교하여 각 로또의 등수를 판별하고 LottoResult를 반환한다")
-	// @Test
-	// void test3() {
-	// 	// Given
-	// 	// lotto1: 1, 2, 3, 4, 5, 6 (당첨 번호와 6개 일치 -> 1등)
-	// 	// lotto2: 7, 8, 9, 10, 11, 12 (당첨 번호와 0개 일치 -> 꽝)
-	// 	LottoTickets lottoTickets = new LottoTickets(validLottoList);
-	// 	WinningLotto winningLotto = new WinningLotto(lotto1, 7); // 1~6 당첨, 보너스 7
-	// 	int purchaseAmount = 2000;
-	//
-	// 	// When
-	// 	LottoResult result = lottoTickets.compareWithWinningLotto(winningLotto, purchaseAmount);
-	//
-	// 	// Then (LottoResult의 내부 구현에 따라 검증)
-	// 	// 1등 1개, 꽝 1개 예상
-	// 	assertThat(result.getPrizeCount(Rank.FIRST)).isEqualTo(1);
-	// 	assertThat(result.getPrizeCount(Rank.NONE)).isEqualTo(1);
-	//
-	// 	// 주의: LottoResult 클래스가 아직 구현되지 않았으므로,
-	// 	// 이 테스트는 LottoResult 구현 후 성공적으로 빌드될 수 있습니다.
-	// 	// 현재는 LottoResult 객체가 성공적으로 생성되는지만 확인합니다.
-	// 	assertThat(result).isInstanceOf(LottoResult.class);
-	// }
+	@DisplayName("정상3: 당첨 번호와 비교하여 각 로또의 등수를 판별하고 LottoResult를 반환한다")
+	@Test
+	void test3() {
+		// Given
+		// lotto1: 1, 2, 3, 4, 5, 6 (당첨 번호와 6개 일치 -> 1등)
+		// lotto2: 7, 8, 9, 10, 11, 12 (당첨 번호와 0개 일치 -> 꽝)
+		LottoTickets lottoTickets = new LottoTickets(validLottoList);
+		WinningLotto winningLotto = new WinningLotto(lotto1, 7); // 1~6 당첨, 보너스 7
+		int purchaseAmount = 2000;
+
+		// When
+		LottoResult result = lottoTickets.compareWithWinningLotto(winningLotto, purchaseAmount);
+
+		assertThat(result.getPrizeCount(Rank.FIRST)).isEqualTo(1);
+		assertThat(result.getPrizeCount(Rank.NONE)).isEqualTo(0);
+	}
 
 	@DisplayName("예외1: 로또 리스트가 null이면 예외가 발생한다")
 	@Test
