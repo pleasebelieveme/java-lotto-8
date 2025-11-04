@@ -22,16 +22,10 @@ public class LottoTickets {
 		this.lottos = lottos;
 	}
 
-	/**
-	 * 구매한 로또의 개수를 반환합니다.
-	 */
 	public int getLottoCount() {
 		return lottos.size();
 	}
 
-	/**
-	 * 모든 로또를 반환합니다.
-	 */
 	public List<Lotto> getLottos() {
 		return Collections.unmodifiableList(lottos);
 	}
