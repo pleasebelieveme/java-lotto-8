@@ -36,13 +36,13 @@ public class LottoTickets {
 		return Collections.unmodifiableList(lottos);
 	}
 
-	// public LottoResult compareWithWinningLotto(WinningLotto winningLotto, int purchaseAmount) {
-	// 	// 모든 로또의 당첨 등수를 계산합니다.
-	// 	List<Rank> ranks = lottos.stream()
-	// 		.map(winningLotto::match)
-	// 		.collect(Collectors.toList());
-	//
-	// 	// LottoResult 객체를 생성하여 등수별 개수 및 수익률을 관리합니다.
-	// 	return new LottoResult(ranks, purchaseAmount);
-	// }
+	public LottoResult compareWithWinningLotto(WinningLotto winningLotto, int purchaseAmount) {
+		// 모든 로또의 당첨 등수를 계산합니다.
+		List<Rank> ranks = lottos.stream()
+			.map(winningLotto::match)
+			.collect(Collectors.toList());
+
+		// LottoResult 객체를 생성하여 등수별 개수 및 수익률을 관리합니다.
+		return new LottoResult(ranks, purchaseAmount);
+	}
 }
