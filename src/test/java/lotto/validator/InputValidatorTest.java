@@ -51,17 +51,8 @@ class InputValidatorTest {
 
 	@DisplayName("예외1: 음수를 입력하면 IllegalArgumentException 발생")
 	@ParameterizedTest(name = "입력: {0}")
-	@ValueSource(ints = {-1, -1000})
+	@ValueSource(ints = {-1, -1000, 0})
 	void test5(int amount) {
-		assertThatThrownBy(() -> validatePurchaseAmount(amount))
-			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessage("[ERROR] 구입 금액은 양수여야 합니다.");
-	}
-
-	@DisplayName("예외2: 0을 입력하면 IllegalArgumentException 발생")
-	@Test
-	void test6() {
-		int amount = 0;
 		assertThatThrownBy(() -> validatePurchaseAmount(amount))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("[ERROR] 구입 금액은 0보다 커야 합니다.");
@@ -70,7 +61,7 @@ class InputValidatorTest {
 	@DisplayName("예외3: 1,000원 미만(1~999)이면 IllegalArgumentException 발생")
 	@ParameterizedTest(name = "입력: {0}")
 	@ValueSource(ints = {1, 500, 999})
-	void test7(int amount) {
+	void test6(int amount) {
 		assertThatThrownBy(() -> validatePurchaseAmount(amount))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("[ERROR] 구입 금액은 1,000원 이상이어야 합니다.");
@@ -79,7 +70,7 @@ class InputValidatorTest {
 	@DisplayName("예외4: 1,000원으로 나누어떨어지지 않으면 IllegalArgumentException 발생")
 	@ParameterizedTest(name = "입력: {0}")
 	@ValueSource(ints = {1001, 1500, 8999})
-	void test8(int amount) {
+	void test7(int amount) {
 		assertThatThrownBy(() -> validatePurchaseAmount(amount))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("[ERROR] 구입 금액은 1,000원 단위여야 합니다.");
@@ -88,7 +79,7 @@ class InputValidatorTest {
 
 	@DisplayName("예외5: 번호 리스트가 null이면 IllegalArgumentException 발생")
 	@Test
-	void test9() {
+	void test8() {
 		assertThatThrownBy(() -> validateWinningNumbers(null))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("[ERROR] 로또 번호를 입력해주세요.");
@@ -96,7 +87,7 @@ class InputValidatorTest {
 
 	@DisplayName("예외6: 번호가 6개가 아니면 IllegalArgumentException 발생")
 	@Test
-	void test10() {
+	void test9() {
 		List<Integer> invalidSizeNumbers = List.of(1, 2, 3, 4, 5);
 		assertThatThrownBy(() -> validateWinningNumbers(invalidSizeNumbers))
 			.isInstanceOf(IllegalArgumentException.class)
@@ -106,7 +97,7 @@ class InputValidatorTest {
 	@DisplayName("예외7: 1~45 범위를 벗어나면 IllegalArgumentException 발생")
 	@ParameterizedTest(name = "입력: {0}")
 	@ValueSource(ints = {0, 46})
-	void test11(int invalidNumber) {
+	void test10(int invalidNumber) {
 		List<Integer> outOfRangeNumbers = List.of(1, 2, 3, 4, 5, invalidNumber);
 		assertThatThrownBy(() -> validateWinningNumbers(outOfRangeNumbers))
 			.isInstanceOf(IllegalArgumentException.class)
@@ -115,7 +106,7 @@ class InputValidatorTest {
 
 	@DisplayName("예외8 중복된 번호가 있으면 IllegalArgumentException 발생")
 	@Test
-	void test12() {
+	void test11() {
 		List<Integer> duplicateNumbers = List.of(1, 2, 3, 4, 5, 5);
 		assertThatThrownBy(() -> validateWinningNumbers(duplicateNumbers))
 			.isInstanceOf(IllegalArgumentException.class)
@@ -125,7 +116,7 @@ class InputValidatorTest {
 	@DisplayName("예외12: 보너스 번호가 1~45 범위를 벗어나면 IllegalArgumentException 발생")
 	@ParameterizedTest(name = "입력: {0}")
 	@ValueSource(ints = {0, 46})
-	void test13(int invalidNumber) {
+	void test12(int invalidNumber) {
 		Lotto validWinningLottoNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
 		assertThatThrownBy(() -> validateBonusNumber(validWinningLottoNumbers, invalidNumber))
@@ -135,7 +126,7 @@ class InputValidatorTest {
 
 	@DisplayName("예외13: 보너스 번호가 당첨 번호와 중복되면 IllegalArgumentException 발생")
 	@Test
-	void test14() {
+	void test13() {
 		Lotto validWinningLottoNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 		int duplicateNumber = 6;
 

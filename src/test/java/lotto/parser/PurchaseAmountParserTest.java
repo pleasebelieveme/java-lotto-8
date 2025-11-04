@@ -1,7 +1,6 @@
 package lotto.parser;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -24,9 +23,22 @@ class PurchaseAmountParserTest {
 		assertThat(result).isEqualTo(8000);
 	}
 
-	@DisplayName("예외1: 입력이 null이면 IllegalArgumentException 발생")
+	@DisplayName("정상2: 앞뒤 공백이 포함된 문자열도 정수로 파싱한다")
 	@Test
 	void test2() {
+		// Given
+		String input = " 8000 ";
+
+		// When
+		int result = PurchaseAmountParser.parse(input);
+
+		// Then
+		assertThat(result).isEqualTo(8000);
+	}
+
+	@DisplayName("예외1: 입력이 null이면 IllegalArgumentException 발생")
+	@Test
+	void test3() {
 		String input = null;
 
 		assertThatThrownBy(() -> PurchaseAmountParser.parse(input))
@@ -34,21 +46,19 @@ class PurchaseAmountParserTest {
 			.hasMessage("[ERROR] 구입 금액을 입력해주세요.");
 	}
 
-	@Tag("error")
 	@DisplayName("예외2: 입력이 빈 문자열 또는 공백이면 IllegalArgumentException 발생")
 	@ParameterizedTest(name = "입력: \"{0}\"")
 	@ValueSource(strings = {"", " "})
-	void test3(String input) {
+	void test4(String input) {
 		assertThatThrownBy(() -> PurchaseAmountParser.parse(input))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("[ERROR] 구입 금액을 입력해주세요.");
 	}
 
-	@Tag("error")
 	@DisplayName("예외3: 숫자가 아닌 문자가 포함되면 NumberFormatException 발생")
 	@ParameterizedTest(name = "입력: \"{0}\"")
 	@ValueSource(strings = {"1000원", "a1000", "1,000"})
-	void test4(String input) {
+	void test5(String input) {
 		assertThatThrownBy(() -> PurchaseAmountParser.parse(input))
 			.isInstanceOf(NumberFormatException.class)
 			.hasMessage("[ERROR] 구입 금액은 숫자여야 합니다.");
