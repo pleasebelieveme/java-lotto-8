@@ -1,5 +1,7 @@
 package lotto.service;
 
+import static lotto.common.LottoConstants.*;
+
 import lotto.domain.*;
 import lotto.parser.BonusNumberParser;
 import lotto.parser.PurchaseAmountParser;
@@ -50,8 +52,8 @@ public class LottoGameService {
 			try {
 				String input = inputView.inputPurchaseAmount();
 				int amount = PurchaseAmountParser.parse(input);
-				if (amount % LottoGenerator.LOTTO_PRICE != 0) {
-					throw new IllegalArgumentException("구입 금액은 " + LottoGenerator.LOTTO_PRICE + "원 단위여야 합니다.");
+				if (amount % LOTTO_PRICE != 0) {
+					throw new IllegalArgumentException("구입 금액은 " + LOTTO_PRICE + "원 단위여야 합니다.");
 				}
 				return amount;
 			} catch (IllegalArgumentException e) {
@@ -61,7 +63,7 @@ public class LottoGameService {
 	}
 
 	private LottoTickets buyLottos(int purchaseAmount) {
-		int lottoCount = purchaseAmount / LottoGenerator.LOTTO_PRICE;
+		int lottoCount = purchaseAmount / LOTTO_PRICE;
 		List<Lotto> lottos = lottoGenerator.generateLottos(lottoCount);
 		return new LottoTickets(lottos);
 	}

@@ -1,14 +1,13 @@
 package lotto.validator;
 
+import static lotto.common.LottoConstants.*;
+
 import java.util.List;
 
 import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
 
 public class InputValidator {
-
-	private static final int LOTTO_PRICE = 1000;
-	private static final int MIN_PURCHASE_AMOUNT = 1000;
 
 	/**
 	 * 구매 금액이 유효한지 검증합니다.
