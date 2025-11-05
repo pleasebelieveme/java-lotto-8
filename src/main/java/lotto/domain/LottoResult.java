@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.common.ErrorMessages.*;
+
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +15,7 @@ public class LottoResult {
 
 	public LottoResult(List<Rank> ranks, int purchaseAmount) {
 		if (purchaseAmount < MIN_PURCHASE_AMOUNT) {
-			throw new IllegalArgumentException("[ERROR] 구매 금액은 0보다 커야 합니다.");
+			throw new IllegalArgumentException(LOTTO_RESULT_PURCHASE_AMOUNT);
 		}
 		this.purchaseAmount = purchaseAmount;
 		this.result = countRanks(ranks);
@@ -48,14 +50,13 @@ public class LottoResult {
 	}
 
 	/**
-	 * 총 수익률을 계산합니다. (소수점 둘째 자리에서 반올림하여 첫째 자리까지 표시)
-	 * 예: 62.5%, 100.0%
+	 * 총 수익률을 계산합니다.
+	 *
+	 * @return 수익률 (퍼센트, 소수점 포함)
 	 */
-	public String calculateProfitRate() {
+	public double calculateProfitRate() {
 		long totalProfit = calculateTotalProfit();
-		double profitRate = (double) totalProfit * 100 / purchaseAmount;
-
-		return String.format(PROFIT_RATE_FORMAT, profitRate);
+		return (double) totalProfit * 100 / purchaseAmount;
 	}
 
 	public Map<Rank, Integer> getResult() {

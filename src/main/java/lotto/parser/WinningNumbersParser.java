@@ -1,14 +1,13 @@
 package lotto.parser;
 
+import static lotto.common.ErrorMessages.*;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningNumbersParser {
 	private static final String SEPARATOR = ",";
-	private static final String ERROR_EMPTY_INPUT = "[ERROR] 당첨 번호를 입력해주세요.";
-	private static final String ERROR_EMPTY_VALUE = "[ERROR] 당첨 번호는 빈 값일 수 없습니다.";
-	private static final String ERROR_INVALID_FORMAT = "[ERROR] 당첨 번호는 숫자여야 합니다.";
 
 	/**
 	 * 사용자 입력 문자열(당첨 번호)을 정수 리스트로 파싱하여 반환합니다.
@@ -19,7 +18,7 @@ public class WinningNumbersParser {
 	 * @throws NumberFormatException 숫자가 아닌 값이 포함된 경우
 	 */
 	public static List<Integer> parse(String input) {
-		ParserUtils.validateNotNullOrEmpty(input, ERROR_EMPTY_INPUT);
+		ParserUtils.validateNotNullOrEmpty(input, WINNING_NUMBERS_EMPTY);
 
 		List<String> numberStrings = splitBySeparator(input);
 		return parseToIntegers(numberStrings);
@@ -36,13 +35,13 @@ public class WinningNumbersParser {
 
 	private static void validateNoEmptyValues(List<String> parts) {
 		if (parts.stream().anyMatch(String::isEmpty)) {
-			throw new IllegalArgumentException(ERROR_EMPTY_VALUE);
+			throw new IllegalArgumentException(WINNING_NUMBERS_EMPTY_VALUE);
 		}
 	}
 
 	private static List<Integer> parseToIntegers(List<String> numberStrings) {
 		return numberStrings.stream()
-			.map(str -> ParserUtils.parseToInteger(str, ERROR_INVALID_FORMAT))
+			.map(str -> ParserUtils.parseToInteger(str, WINNING_NUMBERS_INVALID_FORMAT))
 			.collect(Collectors.toList());
 	}
 }

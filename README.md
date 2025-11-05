@@ -501,6 +501,81 @@ if (lottoTickets == null) {
 
 ---
 
+## 📊 상수 관리 현황
+
+### ErrorMessages 사용 현황
+
+| 상수 이름 | 사용 위치 | 상태 |
+|-----------|-----------|------|
+| `PURCHASE_AMOUNT_ZERO` | InputValidator | ✅ |
+| `PURCHASE_AMOUNT_MINIMUM` | InputValidator | ✅ |
+| `PURCHASE_AMOUNT_UNIT` | InputValidator | ✅ |
+| `PURCHASE_AMOUNT_EMPTY` | PurchaseAmountParser | ✅ |
+| `PURCHASE_AMOUNT_INVALID_FORMAT` | PurchaseAmountParser | ✅ |
+| `LOTTO_NUMBERS_NULL` | Lotto, WinningLotto | ✅ |
+| `LOTTO_NUMBERS_SIZE` | Lotto | ✅ |
+| `LOTTO_NUMBERS_DUPLICATE` | Lotto | ✅ |
+| `LOTTO_NUMBERS_RANGE` | Lotto | ✅ |
+| `WINNING_NUMBERS_EMPTY` | WinningNumbersParser | ✅ |
+| `WINNING_NUMBERS_INVALID_FORMAT` | WinningNumbersParser | ✅ |
+| `WINNING_NUMBERS_EMPTY_VALUE` | WinningNumbersParser | ✅ |
+| `BONUS_NUMBER_EMPTY` | BonusNumberParser | ✅ |
+| `BONUS_NUMBER_INVALID_FORMAT` | BonusNumberParser | ✅ |
+| `BONUS_NUMBER_RANGE` | WinningLotto | ✅ |
+| `BONUS_NUMBER_DUPLICATE` | WinningLotto | ✅ |
+| `LOTTO_TICKETS_NULL` | LottoTickets | ✅ |
+| `LOTTO_TICKETS_EMPTY` | LottoTickets | ✅ |
+| `LOTTO_RESULT_PURCHASE_AMOUNT` | LottoResult | ✅ |
+
+### ViewMessages 사용 현황
+
+| 상수 이름 | 사용 위치 | 용도 | 상태 |
+|-----------|-----------|------|------|
+| `INPUT_PURCHASE_AMOUNT` | InputView | 구매 금액 입력 안내 | ✅ |
+| `INPUT_WINNING_NUMBERS` | InputView | 당첨 번호 입력 안내 | ✅ |
+| `INPUT_BONUS_NUMBER` | InputView | 보너스 번호 입력 안내 | ✅ |
+| `PURCHASED_LOTTO_COUNT_FORMAT` | OutputView | 구매 개수 출력 | ✅ |
+| `WINNING_STATISTICS_HEADER` | OutputView | 통계 헤더 출력 | ✅ |
+| `SEPARATOR` | OutputView | 구분선 출력 | ✅ |
+| `RANK_FORMAT` | OutputView | 등수별 당첨 결과 출력 | ✅ |
+| `PROFIT_RATE_FORMAT` | OutputView | 수익률 출력 | ✅ |
+
+### LottoConstants 사용 현황
+
+| 상수 이름 | 값 | 사용 위치 | 상태 |
+|-----------|-----|-----------|------|
+| `MIN_LOTTO_NUMBER` | 1 | Lotto, WinningLotto, LottoGenerator | ✅ |
+| `MAX_LOTTO_NUMBER` | 45 | Lotto, WinningLotto, LottoGenerator | ✅ |
+| `LOTTO_NUMBER_COUNT` | 6 | Lotto, LottoGenerator | ✅ |
+| `LOTTO_PRICE` | 1000 | InputValidator, LottoGenerator | ✅ |
+
+---
+
+## 🎨 상수 설계 원칙
+
+### 1. 단일 책임 원칙 (SRP)
+- **ErrorMessages**: 에러 메시지만 관리
+- **ViewMessages**: View 출력 메시지만 관리
+- **LottoConstants**: 비즈니스 상수만 관리
+
+### 2. 중복 제거 (DRY)
+- 모든 문자열 리터럴을 상수로 추출
+- 한 곳에서 수정하면 전체에 반영
+
+### 3. 명확한 네이밍
+- 상수 이름만으로 용도를 파악 가능
+- 접두사를 통한 그룹핑 (PURCHASE_AMOUNT_*, LOTTO_NUMBERS_*)
+
+### 4. 패키지 구조
+```
+lotto/
+└── common/
+    ├── ErrorMessages.java      # 에러 메시지
+    ├── ViewMessages.java       # View 메시지
+    └── LottoConstants.java     # 비즈니스 상수
+```
+---
+
 ## 🧪 테스트
 
 ### 테스트 구조

@@ -101,7 +101,7 @@ class WinningLottoTest {
 	void test7() {
 		assertThatThrownBy(() -> new WinningLotto(null, 7))
 			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessageContaining("[ERROR] 당첨 번호를 입력해주세요.");
+			.hasMessageContaining("[ERROR] 로또 번호를 입력해주세요.");
 	}
 
 	@DisplayName("예외2: 보너스 번호가 당첨 번호와 중복되면 IllegalArgumentException 발생")
