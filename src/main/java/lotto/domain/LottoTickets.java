@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.common.ErrorMessages.*;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -12,11 +14,11 @@ public class LottoTickets {
 
 	public LottoTickets(List<Lotto> lottos) {
 		if (Objects.isNull(lottos)) {
-			throw new IllegalArgumentException("[ERROR] 로또 목록이 없습니다.");
+			throw new IllegalArgumentException(LOTTO_TICKETS_NULL);
 		}
 
 		if (lottos.size() < MIN_LOTTO_COUNT) {
-			throw new IllegalArgumentException("[ERROR] 최소 1개 이상의 로또를 구매해야 합니다.");
+			throw new IllegalArgumentException(LOTTO_TICKETS_EMPTY);
 		}
 
 		this.lottos = lottos;

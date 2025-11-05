@@ -1,11 +1,12 @@
 package lotto.domain;
 
+import static lotto.common.ErrorMessages.*;
+import static lotto.common.LottoConstants.*;
+
 import java.util.List;
 import java.util.Objects;
 
 public class WinningLotto {
-	private static final int MIN_LOTTO_NUMBER = 1;
-	private static final int MAX_LOTTO_NUMBER = 45;
 	private final Lotto winningNumbers;
 	private final int bonusNumber;
 
@@ -23,19 +24,19 @@ public class WinningLotto {
 
 	private void validateNotNull(Lotto winningNumbers) {
 		if (Objects.isNull(winningNumbers)) {
-			throw new IllegalArgumentException("[ERROR] 당첨 번호를 입력해주세요.");
+			throw new IllegalArgumentException(LOTTO_NUMBERS_NULL);
 		}
 	}
 
 	private void validateBonusNumberRange(int bonusNumber) {
 		if (bonusNumber < MIN_LOTTO_NUMBER || bonusNumber > MAX_LOTTO_NUMBER) {
-			throw new IllegalArgumentException("[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.");
+			throw new IllegalArgumentException(BONUS_NUMBER_RANGE);
 		}
 	}
 
 	private void validateDuplicateWithWinningNumbers(Lotto winningNumbers, int bonusNumber) {
 		if (winningNumbers.contains(bonusNumber)) {
-			throw new IllegalArgumentException("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+			throw new IllegalArgumentException(BONUS_NUMBER_DUPLICATE);
 		}
 	}
 

@@ -1,12 +1,16 @@
 package lotto.validator;
 
-import static lotto.common.LottoConstants.*;
-
 import java.util.List;
 
 import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
 
+import static lotto.common.LottoConstants.*;
+import static lotto.common.ErrorMessages.*;
+
+/**
+ * 사용자 입력값을 검증하는 유틸리티 클래스입니다.
+ */
 public class InputValidator {
 
 	/**
@@ -17,13 +21,13 @@ public class InputValidator {
 	 */
 	public static void validatePurchaseAmount(int amount) {
 		if (amount <= 0) {
-			throw new IllegalArgumentException("[ERROR] 구입 금액은 0보다 커야 합니다.");
+			throw new IllegalArgumentException(PURCHASE_AMOUNT_ZERO);
 		}
-		if (amount < MIN_PURCHASE_AMOUNT) {
-			throw new IllegalArgumentException("[ERROR] 구입 금액은 1,000원 이상이어야 합니다.");
+		if (amount < LOTTO_PRICE) {
+			throw new IllegalArgumentException(PURCHASE_AMOUNT_MINIMUM);
 		}
 		if (amount % LOTTO_PRICE != 0) {
-			throw new IllegalArgumentException("[ERROR] 구입 금액은 1,000원 단위여야 합니다.");
+			throw new IllegalArgumentException(PURCHASE_AMOUNT_UNIT);
 		}
 	}
 
